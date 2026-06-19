@@ -15,7 +15,7 @@ const STATUS_TABS: { label: string; value: WithdrawalStatus | 'all' }[] = [
   { label: 'All', value: 'all' },
 ]
 
-function statusColor(status: WithdrawalStatus): 'yellow' | 'green' | 'red' {
+function statusVariant(status: WithdrawalStatus): 'yellow' | 'green' | 'red' {
   if (status === 'pending') return 'yellow'
   if (status === 'approved') return 'green'
   return 'red'
@@ -151,7 +151,7 @@ export default function Withdrawals() {
                     {Number(req.amount).toFixed(2)} {req.currency}
                   </td>
                   <td className="px-4 py-3">
-                    <Badge color={statusColor(req.status)}>
+                    <Badge variant={statusVariant(req.status)}>
                       {req.status.charAt(0).toUpperCase() + req.status.slice(1)}
                     </Badge>
                   </td>
@@ -191,7 +191,7 @@ export default function Withdrawals() {
       {/* Approve / Reject Modal */}
       {selected && action && (
         <Modal
-          isOpen
+          open
           onClose={closeModal}
           title={action === 'approve' ? 'Approve Withdrawal' : 'Reject Withdrawal'}
           size="md"
