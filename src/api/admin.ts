@@ -95,3 +95,20 @@ export const adminBookingsApi = {
   refund: (bookingId: string, body: { amount?: number; reason?: string }) =>
     apiClient.post(`/admin/bookings/${bookingId}/refund`, body),
 }
+
+// ─── System Settings ──────────────────────────────────────────────────────────
+
+export interface SystemSetting {
+  key: string
+  value: string
+  description: string | null
+  updatedAt: string
+}
+
+export const adminSettingsApi = {
+  list: () =>
+    apiClient.get<SystemSetting[]>('/admin/settings'),
+
+  update: (key: string, value: string) =>
+    apiClient.put<SystemSetting>(`/admin/settings/${key}`, { value }),
+}
