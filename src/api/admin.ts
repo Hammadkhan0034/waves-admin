@@ -133,4 +133,16 @@ export const adminLegalPagesApi = {
 
   updatePrivacyPolicy: (body: Pick<LegalPage, 'title' | 'content' | 'version' | 'isPublished'>) =>
     apiClient.put<LegalPage>('/admin/legal-pages/privacy-policy', body),
+
+  getTermsAndConditions: () =>
+    apiClient.get<LegalPage>('/admin/legal-pages/terms-and-conditions'),
+
+  updateTermsAndConditions: (body: Pick<LegalPage, 'title' | 'content' | 'version' | 'isPublished'>) =>
+    apiClient.put<LegalPage>('/admin/legal-pages/terms-and-conditions', body),
+
+  getHelpCenter: () =>
+    apiClient.get<LegalPage>('/admin/legal-pages/help-center'),
+
+  updateHelpCenter: (body: Pick<LegalPage, 'title' | 'content' | 'version' | 'isPublished'>) =>
+    apiClient.put<LegalPage>('/admin/legal-pages/help-center', body),
 }
