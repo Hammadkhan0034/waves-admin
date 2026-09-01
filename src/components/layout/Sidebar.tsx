@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard, Users, UserCheck, Ship, BookOpen,
-  CreditCard, Navigation, ArrowDownToLine, Settings, LogOut, Waves,
+  CreditCard, Navigation, ArrowDownToLine, Settings, LogOut, Waves, Shield,
 } from 'lucide-react'
 import { useAuthStore } from '../../store/authStore'
 import { authApi } from '../../api/auth'
@@ -16,6 +16,7 @@ const nav = [
   { to: '/payments', label: 'Payments', icon: CreditCard },
   { to: '/ride-requests', label: 'Ride Requests', icon: Navigation },
   { to: '/withdrawals', label: 'Withdrawals', icon: ArrowDownToLine },
+  { to: '/content/privacy-policy', label: 'Privacy Policy', icon: Shield },
   { to: '/settings', label: 'Settings', icon: Settings },
 ]
 
