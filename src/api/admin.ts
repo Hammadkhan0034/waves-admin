@@ -112,3 +112,25 @@ export const adminSettingsApi = {
   update: (key: string, value: string) =>
     apiClient.put<SystemSetting>(`/admin/settings/${key}`, { value }),
 }
+
+// ─── Legal Pages ──────────────────────────────────────────────────────────────
+
+export interface LegalPage {
+  slug: string
+  title: string
+  content: string
+  version: string
+  isPublished: boolean
+  updatedAt: string
+}
+
+export const adminLegalPagesApi = {
+  list: () =>
+    apiClient.get<LegalPage[]>('/admin/legal-pages'),
+
+  getPrivacyPolicy: () =>
+    apiClient.get<LegalPage>('/admin/legal-pages/privacy-policy'),
+
+  updatePrivacyPolicy: (body: Pick<LegalPage, 'title' | 'content' | 'version' | 'isPublished'>) =>
+    apiClient.put<LegalPage>('/admin/legal-pages/privacy-policy', body),
+}
