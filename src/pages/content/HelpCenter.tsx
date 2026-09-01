@@ -105,13 +105,13 @@ export default function HelpCenter() {
               </Table>
 
               {meta && meta.totalPages > 1 && (
-                <div className="px-4 py-3 border-t border-gray-100">
-                  <Pagination
-                    page={meta.page}
-                    totalPages={meta.totalPages}
-                    onPageChange={setPage}
-                  />
-                </div>
+                <Pagination
+                  page={meta.page}
+                  totalPages={meta.totalPages}
+                  total={meta.total}
+                  limit={meta.limit}
+                  onPage={setPage}
+                />
               )}
             </>
           )}
