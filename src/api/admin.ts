@@ -139,10 +139,31 @@ export const adminLegalPagesApi = {
 
   updateTermsAndConditions: (body: Pick<LegalPage, 'title' | 'content' | 'version' | 'isPublished'>) =>
     apiClient.put<LegalPage>('/admin/legal-pages/terms-and-conditions', body),
+}
 
-  getHelpCenter: () =>
-    apiClient.get<LegalPage>('/admin/legal-pages/help-center'),
+// ─── Help Center Submissions ────────────────────────────────────────────────────
 
-  updateHelpCenter: (body: Pick<LegalPage, 'title' | 'content' | 'version' | 'isPublished'>) =>
-    apiClient.put<LegalPage>('/admin/legal-pages/help-center', body),
+export interface HelpCenterSubmission {
+  id: string
+  userId: string
+  subject: string
+  message: string
+  createdAt: string
+  updatedAt: string
+  user?: {
+    id: string
+    phone?: string
+    email?: string
+    profile?: {
+      name?: string
+    }
+  }
+}
+
+export const adminHelpCenterApi = {
+  list: (params: { page?: number; limit?: number; search?: string } = {}) =>
+    apiClient.get<PaginatedResponse<HelpCenterSubmission>>(`/admin/help-center/submissions${qs(params)}`),
+
+  getById: (id: string) =>
+    apiClient.get<HelpCenterSubmission>(`/admin/help-center/submissions/${id}`),
 }
