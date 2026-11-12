@@ -18,6 +18,7 @@ import Settings from './pages/settings/Settings'
 import PrivacyPolicy from './pages/content/PrivacyPolicy'
 import TermsAndConditions from './pages/content/TermsAndConditions'
 import HelpCenter from './pages/content/HelpCenter'
+import ServiceLocations from './pages/content/ServiceLocations'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,6 +61,7 @@ export default function App() {
             <Route path="content/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="content/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="content/help-center" element={<HelpCenter />} />
+            <Route path="content/service-locations" element={<ServiceLocations />} />
             <Route path="settings" element={<Settings />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
