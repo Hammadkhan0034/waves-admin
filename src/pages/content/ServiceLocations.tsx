@@ -25,6 +25,21 @@ const emptyForm: ServiceLocationInput = {
   isActive: true,
 }
 
+/** API may return coordinates as strings (decimal columns) or 0 when unset. */
+function toOptionalCoord(value: unknown): number | undefined {
+  if (value === '' || value == null) return undefined
+  const n = typeof value === 'number' ? value : Number(value)
+  return Number.isFinite(n) ? n : undefined
+}
+
+function formatLatLng(lat: unknown, lng: unknown): string {
+  const la = toOptionalCoord(lat)
+  const ln = toOptionalCoord(lng)
+  if (la == null || ln == null) return '—'
+  if (la === 0 && ln === 0) return '—'
+  return `${la.toFixed(5)}, ${ln.toFixed(5)}`
+}
+
 export default function ServiceLocations() {
   const queryClient = useQueryClient()
   const [modalOpen, setModalOpen] = useState(false)
@@ -77,8 +92,8 @@ export default function ServiceLocations() {
       sortOrder: row.sortOrder,
       name: row.name,
       address: row.address,
-      lat: row.lat ?? undefined,
-      lng: row.lng ?? undefined,
+      lat: toOptionalCoord(row.lat),
+      lng: toOptionalCoord(row.lng),
       notes: row.notes ?? '',
       isActive: row.isActive,
     })
@@ -144,9 +159,7 @@ export default function ServiceLocations() {
                     </Td>
                     <Td className="text-sm text-gray-700 max-w-xs">{row.address}</Td>
                     <Td className="text-sm text-gray-600 whitespace-nowrap">
-                      {row.lat != null && row.lng != null
-                        ? `${row.lat.toFixed(5)}, ${row.lng.toFixed(5)}`
-                        : '—'}
+                      {formatLatLng(row.lat, row.lng)}
                     </Td>
                     <Td>
                       <span

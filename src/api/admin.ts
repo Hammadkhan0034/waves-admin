@@ -175,8 +175,8 @@ export interface ServiceLocation {
   sortOrder: number
   name: string
   address: string
-  lat: number | null
-  lng: number | null
+  lat: number | string | null
+  lng: number | string | null
   notes: string | null
   isActive: boolean
   createdAt: string
