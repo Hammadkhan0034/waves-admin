@@ -167,3 +167,45 @@ export const adminHelpCenterApi = {
   getById: (id: string) =>
     apiClient.get<HelpCenterSubmission>(`/admin/help-center/submissions/${id}`),
 }
+
+// ─── Service Locations ──────────────────────────────────────────────────────────
+
+export interface ServiceLocation {
+  id: string
+  sortOrder: number
+  name: string
+  address: string
+  lat: number | null
+  lng: number | null
+  notes: string | null
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface ServiceLocationInput {
+  sortOrder: number
+  name: string
+  address: string
+  lat?: number
+  lng?: number
+  notes?: string
+  isActive?: boolean
+}
+
+export const adminServiceLocationsApi = {
+  list: () =>
+    apiClient.get<ServiceLocation[]>('/admin/service-locations'),
+
+  getById: (id: string) =>
+    apiClient.get<ServiceLocation>(`/admin/service-locations/${id}`),
+
+  create: (body: ServiceLocationInput) =>
+    apiClient.post<ServiceLocation>('/admin/service-locations', body),
+
+  update: (id: string, body: Partial<ServiceLocationInput>) =>
+    apiClient.put<ServiceLocation>(`/admin/service-locations/${id}`, body),
+
+  remove: (id: string) =>
+    apiClient.delete<{ message: string }>(`/admin/service-locations/${id}`),
+}
